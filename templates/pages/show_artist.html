@@ -33,46 +33,64 @@
 				<i class="fas fa-quote-left"></i> {{ artist.seeking_description }} <i class="fas fa-quote-right"></i>
 			</div>
 		</div>
-		{% else %}	
+		{% else %}
 		<p class="not-seeking">
 			<i class="fas fa-moon"></i> Not currently seeking performance venues
 		</p>
 		{% endif %}
+    <div class="btn-art-grp">
+    <a href="/artists/{{ artist.id }}/edit"><button class="btn btn-primary btn-lg">Edit</button></a>
+<a href="/artists/{{ artist.id }}/availability"><button class="btn btn-default btn-lg">Manage Availability</button></a>
+<a href="/artists/{{ artist.id }}/albums"><button class="btn btn-default btn-lg">Manage Albums</button></a>
+<form method="POST" action="/artists/{{ artist.id }}/delete" style="display:inline;">
+  <button type="submit" class="btn btn-danger btn-lg">Delete</button>
+</form>
+  </div>
 	</div>
 	<div class="col-sm-6">
 		<img src="{{ artist.image_link }}" alt="Venue Image" />
 	</div>
 </div>
-<section>
-	<h2 class="monospace">{{ artist.upcoming_shows_count }} Upcoming {% if artist.upcoming_shows_count == 1 %}Show{% else %}Shows{% endif %}</h2>
-	<div class="row">
-		{%for show in artist.upcoming_shows %}
-		<div class="col-sm-4">
-			<div class="tile tile-show">
-				<img src="{{ show.venue_image_link }}" alt="Show Venue Image" />
-				<h5><a href="/venues/{{ show.venue_id }}">{{ show.venue_name }}</a></h5>
-				<h6>{{ show.start_time|datetime('full') }}</h6>
-			</div>
-		</div>
-		{% endfor %}
-	</div>
-</section>
-<section>
-	<h2 class="monospace">{{ artist.past_shows_count }} Past {% if artist.past_shows_count == 1 %}Show{% else %}Shows{% endif %}</h2>
-	<div class="row">
-		{%for show in artist.past_shows %}
-		<div class="col-sm-4">
-			<div class="tile tile-show">
-				<img src="{{ show.venue_image_link }}" alt="Show Venue Image" />
-				<h5><a href="/venues/{{ show.venue_id }}">{{ show.venue_name }}</a></h5>
-				<h6>{{ show.start_time|datetime('full') }}</h6>
-			</div>
-		</div>
-		{% endfor %}
-	</div>
-</section>
-
-<a href="/artists/{{ artist.id }}/edit"><button class="btn btn-primary btn-lg">Edit</button></a>
+<div class="row" style="margin-top:30px;">
+  <div class="col-sm-4">
+    <h2 class="monospace">{{ artist.past_shows_count }} Past {% if artist.past_shows_count == 1 %}Show{% else %}Shows{% endif %}</h2>
+    {% for show in artist.past_shows %}
+    <div style="margin-bottom:20px;">
+      <img src="{{ show.venue_image_link }}" alt="Show Venue Image" style="width:100%; border-radius:6px; margin-bottom:8px;">
+      <h5><a href="/venues/{{ show.venue_id }}">{{ show.venue_name }}</a></h5>
+      <h6>{{ show.start_time|datetime('full') }}</h6>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="col-sm-4">
+    <h2 class="monospace">{{ artist.upcoming_shows_count }} Upcoming {% if artist.upcoming_shows_count == 1 %}Show{% else %}Shows{% endif %}</h2>
+    {% for show in artist.upcoming_shows %}
+    <div style="margin-bottom:20px;">
+      <img src="{{ show.venue_image_link }}" alt="Show Venue Image" style="width:100%; border-radius:6px; margin-bottom:8px;">
+      <h5><a href="/venues/{{ show.venue_id }}">{{ show.venue_name }}</a></h5>
+      <h6>{{ show.start_time|datetime('full') }}</h6>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="col-sm-4">
+    {% if artist.albums %}
+    <h2 class="monospace">Discography</h2>
+    {% for album in artist.albums %}
+    <div style="margin-bottom:20px;">
+      {% if album.image_link %}
+      <img src="{{ album.image_link }}" alt="{{ album.title }}" style="width:100%; border-radius:6px; margin-bottom:8px;">
+      {% endif %}
+      <h4>{{ album.title }} {% if album.release_year %}<small class="text-muted">({{ album.release_year }})</small>{% endif %}</h4>
+      <ul class="list-unstyled">
+        {% for song in album.songs %}
+        <li>♪ {{ song.title }}{% if song.duration %} <span class="text-muted">— {{ song.duration }}</span>{% endif %}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+</div>
 
 {% endblock %}
 

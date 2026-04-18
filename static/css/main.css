@@ -188,11 +188,21 @@ h2.monospace {
   text-align: center;
   padding: 15px 25px;
   border: solid 1px #ebebeb;
-  height: 325px;
+  height: 400px !important;
   margin-bottom: 15px;
 }
 .tile img {
   max-height: 200px;
+}
+.tile-artist {
+  height: 325px !important;
+}
+.btn-show-del {
+  width: 50%;
+  margin:0 auto;
+}
+.btn-art-grp{
+  margin-top: 20px;
 }
 .form-wrapper {
   max-width: 400px;

@@ -1,16 +1,19 @@
 {% extends 'layouts/main.html' %}
 {% block title %}Fyyur | Artists{% endblock %}
 {% block content %}
-<ul class="items">
-	{% for artist in artists %}
-	<li>
-		<a href="/artists/{{ artist.id }}">
-			<i class="fas fa-users"></i>
-			<div class="item">
-				<h5>{{ artist.name }}</h5>
-			</div>
-		</a>
-	</li>
-	{% endfor %}
-</ul>
+<div class="row" style="margin-top:20px;">
+  {% for artist in artists %}
+  <div class="col-sm-4" style="margin-bottom:20px;">
+    <a href="/artists/{{ artist.id }}" style="text-decoration:none; color:inherit;">
+      <div class="tile tile-show">
+        {% if artist.image_link %}
+        <img src="{{ artist.image_link }}" alt="{{ artist.name }}" />
+        {% endif %}
+        <h5>{{ artist.name }}</h5>
+        <p class="text-muted">{{ artist.city }}, {{ artist.state }}</p>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+</div>
 {% endblock %}

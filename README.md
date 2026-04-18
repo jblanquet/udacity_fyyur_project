@@ -1,6 +1,43 @@
 Fyyur
 -----
 
+## Implementation Notes
+
+This project was completed as part of the Udacity Full Stack Web Developer Nanodegree. The following was implemented on top of the starter code:
+
+### What Was Built
+- **models.py** — All SQLAlchemy models (Venue, Artist, Show, Availability, Album, Song) in a separate file following Separation of Concerns
+- **Full CRUD** — Create, read, update, and delete for venues, artists, and shows
+- **Real database queries** — All mock data replaced with PostgreSQL queries using explicit JOINs
+- **Search** — Case-insensitive partial search across name, city, and state; `City, State` format triggers a precise city+state filter
+- **Flask-Migrate** — Database schema managed via migrations
+
+### Stand-Out Features Implemented
+- **Artist Availability** — Artists can define available time windows; show creation is blocked if the artist has future availability windows and the show time falls outside them
+- **Recent Listings on Homepage** — Top 10 most recently added venues and artists shown on the home page
+- **City & State Search** — Searching `"San Francisco, CA"` returns all venues/artists in that city and state; plain terms search across name, city, and state
+- **Artist Discography** — Albums and songs can be managed per artist and displayed on the artist page
+
+### Running with DevContainer (Recommended)
+This project uses a VS Code DevContainer with Docker Compose — no local Python or PostgreSQL installation needed.
+
+1. Open the project in VS Code
+2. When prompted, click **Reopen in Container**
+3. Once the container is ready, run the following in the terminal:
+```bash
+# Set up the database
+FLASK_APP=app.py flask db upgrade
+
+# (Optional) Seed with sample data
+python seed.py
+
+# Start the app
+FLASK_APP=app.py flask run --host=0.0.0.0
+```
+4. Navigate to [http://localhost:5000](http://localhost:5000)
+
+---
+
 ## Introduction
 
 Fyyur is a musical venue and artist booking site that facilitates the discovery and bookings of shows between local performing artists and venues. This site lets you list new artists and venues, discover them, and list shows with artists as a venue owner.

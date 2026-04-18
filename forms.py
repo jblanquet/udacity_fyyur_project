@@ -1,7 +1,7 @@
 from datetime import datetime
 from flask_wtf import Form
 from wtforms import StringField, SelectField, SelectMultipleField, DateTimeField, BooleanField
-from wtforms.validators import DataRequired, AnyOf, URL
+from wtforms.validators import DataRequired, AnyOf, URL, Regexp, Optional
 
 class ShowForm(Form):
     artist_id = StringField(
@@ -13,7 +13,8 @@ class ShowForm(Form):
     start_time = DateTimeField(
         'start_time',
         validators=[DataRequired()],
-        default= datetime.today()
+        default=datetime.today(),
+        format='%Y-%m-%d %H:%M'
     )
 
 class VenueForm(Form):
@@ -83,7 +84,7 @@ class VenueForm(Form):
         'address', validators=[DataRequired()]
     )
     phone = StringField(
-        'phone'
+        'phone', validators=[Optional(), Regexp(r'^\d{3}-\d{3}-\d{4}$', message='Phone must be in format: 555-555-5555')]
     )
     image_link = StringField(
         'image_link'
@@ -192,8 +193,7 @@ class ArtistForm(Form):
         ]
     )
     phone = StringField(
-        # TODO implement validation logic for state
-        'phone'
+        'phone', validators=[Optional(), Regexp(r'^\d{3}-\d{3}-\d{4}$', message='Phone must be in format: 555-555-5555')]
     )
     image_link = StringField(
         'image_link'

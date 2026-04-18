@@ -3,13 +3,16 @@
 {% block content %}
 <div class="row shows">
     {%for show in shows %}
-    <div class="col-sm-4">
+    <div class="col-sm-4" style="margin-bottom:20px;">
         <div class="tile tile-show">
             <img src="{{ show.artist_image_link }}" alt="Artist Image" />
             <h4>{{ show.start_time|datetime('full') }}</h4>
             <h5><a href="/artists/{{ show.artist_id }}">{{ show.artist_name }}</a></h5>
             <p>playing at</p>
             <h5><a href="/venues/{{ show.venue_id }}">{{ show.venue_name }}</a></h5>
+            <form method="POST" action="/shows/{{ show.id }}/delete">
+              <button type="submit" class="btn btn-danger btn-sm btn-block btn-show-del">Delete Show</button>
+            </form>
         </div>
     </div>
     {% endfor %}
