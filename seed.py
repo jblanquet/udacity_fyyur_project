@@ -316,18 +316,39 @@ with app.app_context():
 
     # Shows
     shows = [
-        Show(venue_id=v1.id, artist_id=a1.id, start_time=datetime(2025, 3, 10, 20, 0)),
-        Show(venue_id=v4.id, artist_id=a5.id, start_time=datetime(2025, 5, 14, 21, 0)),
-        Show(venue_id=v3.id, artist_id=a3.id, start_time=datetime(2025, 6, 20, 19, 30)),
-        Show(venue_id=v8.id, artist_id=a4.id, start_time=datetime(2025, 7, 4,  18, 0)),
-        Show(venue_id=v11.id, artist_id=a2.id, start_time=datetime(2025, 8, 15, 22, 0)),
-        Show(venue_id=v6.id, artist_id=a7.id, start_time=datetime(2026, 5, 1,  20, 0)),
-        Show(venue_id=v2.id, artist_id=a7.id, start_time=datetime(2026, 6, 10, 21, 0)),
+        # --- Past shows (before 2026-04-19) ---
+        Show(venue_id=v1.id,  artist_id=a1.id,  start_time=datetime(2025, 3, 10, 20, 0)),
+        Show(venue_id=v4.id,  artist_id=a5.id,  start_time=datetime(2025, 5, 14, 21, 0)),
+        Show(venue_id=v3.id,  artist_id=a3.id,  start_time=datetime(2025, 6, 20, 19, 30)),
+        Show(venue_id=v8.id,  artist_id=a4.id,  start_time=datetime(2025, 7,  4, 18, 0)),
+        Show(venue_id=v11.id, artist_id=a2.id,  start_time=datetime(2025, 8, 15, 22, 0)),
+        # a1 - 2 more past shows (total 3 past)
+        Show(venue_id=v3.id,  artist_id=a1.id,  start_time=datetime(2025, 9,  5, 20, 0)),
+        Show(venue_id=v5.id,  artist_id=a1.id,  start_time=datetime(2026, 1, 18, 19, 0)),
+        # a2 - 2 more past shows (total 3 past)
+        Show(venue_id=v4.id,  artist_id=a2.id,  start_time=datetime(2025, 10, 12, 21, 0)),
+        Show(venue_id=v7.id,  artist_id=a2.id,  start_time=datetime(2026, 2, 28, 20, 0)),
+        # a5 - 1 more past show (total 2 past)
+        Show(venue_id=v12.id, artist_id=a5.id,  start_time=datetime(2026, 3, 15, 19, 0)),
+        # v1 - 1 more past show with different artist
+        Show(venue_id=v1.id,  artist_id=a8.id,  start_time=datetime(2025, 11, 20, 20, 0)),
+        # --- Upcoming shows (after 2026-04-19) ---
+        Show(venue_id=v6.id,  artist_id=a7.id,  start_time=datetime(2026, 5,  1, 20, 0)),
+        Show(venue_id=v2.id,  artist_id=a7.id,  start_time=datetime(2026, 6, 10, 21, 0)),
         Show(venue_id=v12.id, artist_id=a10.id, start_time=datetime(2026, 7, 20, 19, 0)),
-        Show(venue_id=v14.id, artist_id=a10.id, start_time=datetime(2026, 8, 5, 20, 30)),
-        Show(venue_id=v9.id, artist_id=a5.id, start_time=datetime(2026, 9, 12, 18, 0)),
-        Show(venue_id=v7.id, artist_id=a6.id, start_time=datetime(2026, 10, 3, 21, 0)),
-        Show(venue_id=v10.id, artist_id=a9.id, start_time=datetime(2026, 11, 22, 20, 0)),
+        Show(venue_id=v14.id, artist_id=a10.id, start_time=datetime(2026, 8,  5, 20, 30)),
+        Show(venue_id=v9.id,  artist_id=a5.id,  start_time=datetime(2026, 9, 12, 18, 0)),
+        Show(venue_id=v7.id,  artist_id=a6.id,  start_time=datetime(2026, 10, 3, 21, 0)),
+        Show(venue_id=v10.id, artist_id=a9.id,  start_time=datetime(2026, 11, 22, 20, 0)),
+        # a7 - 1 more upcoming show (total 3 upcoming)
+        Show(venue_id=v13.id, artist_id=a7.id,  start_time=datetime(2026, 8, 18, 20, 0)),
+        # a10 - 1 more upcoming show (total 3 upcoming)
+        Show(venue_id=v4.id,  artist_id=a10.id, start_time=datetime(2026, 12, 1, 19, 0)),
+        # a1 - 2 upcoming shows
+        Show(venue_id=v1.id,  artist_id=a1.id,  start_time=datetime(2026, 5, 25, 20, 0)),
+        Show(venue_id=v8.id,  artist_id=a1.id,  start_time=datetime(2026, 7, 10, 19, 0)),
+        # v1 - 1 more upcoming with different artist
+        Show(venue_id=v1.id,  artist_id=a3.id,  start_time=datetime(2026, 6, 14, 21, 0)),
     ]
     db.session.add_all(shows)
     db.session.commit()
